@@ -1,28 +1,24 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { shuffle, sort } from "./utils";
+import APP_LOCALE from './constants';
 import "./style.css";
 import "./button.css";
 
 const  App = () => {
-  const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const [values, setValues] = useState(numbers);
-
-  useEffect(() => {
-    console.log(values);
-  }, [values]);
-
+  const initialState = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const [ numbers, setNumbers ] = useState(initialState);
+  const { TITLE, SHUFFLE, SORT } = APP_LOCALE;
+  const elements = numbers.map((num, i) => {
+    return <div className={`box val-${i + 1}`}>{num}</div>;
+  });
   return (
     <Fragment>
-      <h1 className="center header">Shuffle and Sort</h1>
+      <h1 className="center header">{TITLE}</h1>
       <div className="wrapper">
-        <div className="app">
-          {values.map((val, i) => {
-            return <div className={`box val-${i + 1}`}>{val}</div>;
-          })}
-        </div>
+        <div className="app">{elements}</div>
         <div className="controls">
-          <button onClick={() => setValues(shuffle(values))}>shuffle</button>
-          <button onClick={() => setValues(sort(values))}>sort</button>
+          <button onClick={() => setNumbers(shuffle(numbers))}>{SHUFFLE}</button>
+          <button onClick={() => setNumbers(sort(numbers))}>{SORT}</button>
         </div>
       </div>
     </Fragment>
