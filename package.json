@@ -7,13 +7,17 @@
     "react-dom": "^17.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "watch-css": "watch-less -d src -e .css",
+    "start": "react-scripts start -p watch-css",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "less": "^2.7.2",
+    "watch-less": "0.0.4",
+    "lint-staged": "^7.3.0"
   },
   "browserslist": {
     "production": [
@@ -25,6 +29,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --config .prettierrc --loglevel silent --write",
+      "git add"
     ]
   }
 }
